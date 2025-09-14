@@ -3,10 +3,10 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.android.library) apply false
-    id("TranslationPlugin") apply true
+    id("MultilingualPlugin") apply true
 }
 
-translation {
+multilingual {
     // 启用多语言适配，默认关闭
     enable.set(true)
     // 使用project.rootDir获取项目根目录，再拼接相对路径

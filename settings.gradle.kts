@@ -19,6 +19,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TranslationPlugin"
+rootProject.name = "MultilingualPlugin"
 include(":app")
-include(":mylibrary")
+include(":library")
+// 插件项目
+include(":plugin")

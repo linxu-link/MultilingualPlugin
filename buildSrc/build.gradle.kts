@@ -1,10 +1,52 @@
 plugins {
     `java-gradle-plugin` // 核心插件，提供Gradle插件开发支持
-    `maven-publish`      // 用于发布插件（可选）
+    `maven-publish`      // 用于发布插件
+    id("com.gradle.plugin-publish") version "1.3.1"  // 发布到Gradle插件门户
     kotlin("jvm") version "1.9.0"
     id("maven-publish")
-    signing                      // 用于签名发布物
-    id("com.gradle.plugin-publish") version "1.2.1"  // 发布到Gradle插件门户
+//    signing
+}
+
+group = "io.github.wujia"
+version = "0.1.0"
+val pluginDescription = "A plugin that automatically generates Android multi-language resources based on Excel."
+
+gradlePlugin {
+    website.set("https://github.com/linxu-link/MultilingualPlugin")
+    vcsUrl.set("https://github.com/linxu-link/MultilingualPlugin")
+    plugins {
+        register("multilingualPlugin") {
+            id = "io.github.wujia.multilingual"
+            implementationClass = "com.wj.plugin.multilingual.MultilingualPlugin"
+            displayName = "Android Multilingual Plugin"
+            description = pluginDescription
+            tags.set(listOf("android", "translation", "excel", "localization"))
+        }
+    }
+}
+
+// 签名配置
+//signing {
+//    if (project.hasProperty("signingKey")) {
+//        sign(publishing.publications)
+//    }
+//}
+
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+            groupId = project.group.toString()
+            artifactId = "multilingual-plugin"
+            version = project.version.toString()
+        }
+    }
 }
 
 repositories {
@@ -26,89 +68,3 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation(kotlin("stdlib-jdk8"))
 }
-
-gradlePlugin {
-    plugins {
-        create("TranslationPlugin") {
-            id = "com.wj.plugin"
-            implementationClass = "com.wj.plugin.TranslationPlugin"
-        }
-    }
-}
-
-// 配置Maven发布
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-            groupId = project.group.toString()
-            artifactId = "translation-plugin"
-            version = project.version.toString()
-
-            // 发布元数据
-            pom {
-                name.set("Android Translation Plugin")
-                description.set(project.description)
-                url.set("https://github.com/yourusername/TranslationPlugin")  // 项目GitHub地址
-
-                licenses {
-                    license {
-                        name.set("Apache License 2.0")
-                        url.set("https://opensource.org/licenses/Apache-2.0")
-                    }
-                }
-
-                developers {
-                    developer {
-                        id.set("WuJia")
-                        name.set("WuJia")
-                        email.set("linxu_link@foxmail.com")
-                    }
-                }
-
-                scm {
-                    connection.set("scm:git:git@github.com:yourusername/TranslationPlugin.git")
-                    developerConnection.set("scm:git:git@github.com:yourusername/TranslationPlugin.git")
-                    url.set("https://github.com/yourusername/TranslationPlugin")
-                }
-            }
-        }
-    }
-
-    // 配置发布到Maven Central（需要Sonatype账号）
-    repositories {
-        maven {
-            name = "sonatype"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = project.findProperty("sonatype.username") as String?
-                password = project.findProperty("sonatype.password") as String?
-            }
-        }
-    }
-}
-
-// 签名配置（Maven Central要求）
-signing {
-    sign(publishing.publications["maven"])
-}
-
-// 源代码和Javadoc发布（可选，提升可用性）
-java {
-    withSourcesJar()
-    withJavadocJar()
-}
-
-
-//publishing {
-//    repositories {
-//        maven {
-//            url = uri("$buildDir/repository")
-//        }
-//    }
-//    publications {
-//        create<MavenPublication>("maven") {
-//            from(components["java"])
-//        }
-//    }
-//}
