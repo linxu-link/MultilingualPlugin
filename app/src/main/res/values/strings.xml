@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">我的应用</string>
+    <string name="hello_world">你好，世界！</string>
+    <string name="welcome">欢迎使用本应用。</string>
+    <string name="settings">设置</string>
+    <string name="login">登录</string>
+    <string name="logout">退出登录</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+</resources>
