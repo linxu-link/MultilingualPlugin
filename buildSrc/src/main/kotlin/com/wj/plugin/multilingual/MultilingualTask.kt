@@ -1,4 +1,4 @@
-package com.wj.plugin
+package com.wj.plugin.multilingual
 
 import org.apache.poi.ss.usermodel.WorkbookFactory
 import org.gradle.api.DefaultTask
@@ -20,7 +20,7 @@ import javax.xml.transform.stream.StreamResult
  * 翻译插件的任务类
  * @author wujia
  */
-open class TranslationTask : DefaultTask() {
+open class MultilingualTask : DefaultTask() {
     @get:Input
     val excelFilePath: Property<String> = project.objects.property(String::class.java)
 

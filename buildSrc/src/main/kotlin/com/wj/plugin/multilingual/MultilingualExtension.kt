@@ -1,4 +1,4 @@
-package com.wj.plugin
+package com.wj.plugin.multilingual
 
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
@@ -7,7 +7,7 @@ import org.gradle.api.provider.Property
  * 翻译插件的DSL配置扩展
  * @author wujia
  */
-open class TranslationExtension(objectFactory: Project) {
+open class MultilingualExtension(objectFactory: Project) {
     // 插件是否启用
     val enable: Property<Boolean>
 
