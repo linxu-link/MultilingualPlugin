@@ -5,8 +5,8 @@ plugins {
     kotlin("jvm")
 }
 
-group = "io.github.wujia"
-version = "0.1.0"
+group = "io.github.linxu-link"
+version = "0.2.0"
 val pluginDescription = "A plugin that automatically generates Android multi-language resources based on Excel."
 
 gradlePlugin {
@@ -14,7 +14,7 @@ gradlePlugin {
     vcsUrl.set("https://github.com/linxu-link/MultilingualPlugin")
     plugins {
         register("multilingualPlugin") {
-            id = "io.github.wujia.multilingual"
+            id = "io.github.linxu-link.multilingual"
             implementationClass = "com.wj.plugin.multilingual.MultilingualPlugin"
             displayName = "Android Multilingual Plugin"
             description = pluginDescription
