@@ -16,8 +16,7 @@ Auto-generate multi-language string.xml for Android apps.
 -   **全项目适配**：支持多模块工程（如车载应用常见的主应用+子模块结构），只需在根目录配置一次，即可自动应用到所有`app`和`lib`模块，也支持仅配置单一模块的场景。
 -   **增量更新**：新增或修改翻译时，插件会智能更新已有文件，避免重复生成导致的冲突。
 
-![](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/b4021608c27a4cc6880c8ab31e99b9a7~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5p6X5qCpbGluaw==:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiODcwNDY4OTM5NDM0MDM5In0%3D&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1759599187&x-orig-sign=rwdP1KxTtbHQyj7vAdl6jce5KeQ%3D)
-
+![](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/04ea73d878014badac723edeeb1d99fb~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5p6X5qCpbGluaw==:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiODcwNDY4OTM5NDM0MDM5In0%3D&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1760119547&x-orig-sign=JYOQmHuW0tGV1Plw%2Bch0BsAIyfg%3D)
 
 ## 📄 开源协议 | License
 本项目采用 **MIT 许可证**，您可自由地使用、修改、分发本项目代码，无需承担额外义务，仅需在分发时保留原始许可证声明。
