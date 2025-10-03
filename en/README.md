@@ -129,4 +129,4 @@ The plugin will automatically generate directories like `values-en` and `values-
 
 ## 🔙 Switch Language
 - [Back to Root](https://github.com/linxu-link/MultilingualPlugin#%F0%9F%8C%90--language-switch)
-- [中文文档](https://github.com/linxu-link/MultilingualPlugin/blob/main/zh/README.md)
+- [中文文档](https://github.com/linxu-link/MultilingualPlugin//tree/master/zh/README.md)
