@@ -4,7 +4,7 @@ Android应用多语言资源自动生成插件。
 Auto-generate multi-language string.xml for Android apps.
 
 ## 📦 最新版本 | Latest Version
-- **0.2.0**（2025-10-8）
+- **0.2.0**（2025-10-20）
 
 ## 🌐 语言切换 | Language Switch
 - [中文文档](zh/README.md) — 包含详细集成步骤、Excel格式说明

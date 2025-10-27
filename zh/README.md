@@ -13,20 +13,7 @@
 ![](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/b4021608c27a4cc6880c8ab31e99b9a7~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5p6X5qCpbGluaw==:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiODcwNDY4OTM5NDM0MDM5In0%3D&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1759599187&x-orig-sign=rwdP1KxTtbHQyj7vAdl6jce5KeQ%3D)
 
 ## 🚀 集成步骤 - Kotlin DSL
-
-**（1）在项目根目录** **`build.gradle.kts`** **中添加插件依赖：**
-
-```
-plugins {
-    id("io.github.linxu-link") version "0.2.0"
-}
-
-dependencies {
-    classpath("io.github.linxu-link:multilingual:0.2.0")
-}
-```
-
-**（2）全局应用**
+**（1）方案一 - 全局应用**
 
 在根目录`build.gradle.kts`中应用插件并设定配置项：
 
@@ -36,7 +23,7 @@ alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.android.library) apply false
     
-    id("MultilingualPlugin") apply true
+    id("io.github.linxu-link.multilingual") version "0.2.0"
 }
 
 multilingual {
@@ -51,7 +38,7 @@ multilingual {
 } 
 ```
 
-**（3）单模块应用**
+**（2）方案二 - 单模块应用**
 
 在模块内`build.gradle.kts`中应用插件并设定配置项：
 
@@ -60,7 +47,7 @@ plugins {
 alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     
-    id("MultilingualPlugin")
+    id("io.github.linxu-link.multilingual") version "0.2.0"
 }
 
 multilingual {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="app_name">내 앱</string>
+    <string name="hello_world">안녕, 세계!</string>
+    <string name="welcome">앱에 오신 것을 환영합니다.</string>
+    <string name="settings">설정</string>
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="username">사용자 이름</string>
+    <string name="password">비밀번호</string>
+</resources>

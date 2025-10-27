@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="app_name">マイアプリ</string>
+    <string name="hello_world">こんにちは、世界！</string>
+    <string name="welcome">アプリへようこそ。</string>
+    <string name="settings">設定</string>
+    <string name="login">ログイン</string>
+    <string name="logout">ログアウト</string>
+    <string name="username">ユーザー名</string>
+    <string name="password">パスワード</string>
+</resources>

@@ -16,20 +16,7 @@ A Gradle Plugin for Automotive Android Apps that automatically generates multi-l
 
 ## 🚀 Integration Steps - Kotlin DSL
 
-**(1) Add Plugin Dependency in Root Project `build.gradle.kts`:**
-
-```kotlin
-plugins {
-    id("io.github.linxu-link") version "0.2.0" // Publishing plugin
-}
-
-dependencies {
-    classpath("io.github.linxu-link:multilingual:0.2.0") // Reference the plugin
-}
-```  
-
-
-**(2) Global Application**
+**(1) Option 1 - Global Application**
 
 Apply the plugin and set configuration items in the root directory’s `build.gradle.kts`:
 
@@ -38,8 +25,8 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.android.library) apply false
-    
-    id("MultilingualPlugin") apply true
+
+    id("io.github.linxu-link.multilingual") version "0.2.0"
 }
 
 multilingual {
@@ -55,7 +42,7 @@ multilingual {
 ```  
 
 
-**(3) Single Module Application**
+**(2) Option 2 - Single Module Application**
 
 Apply the plugin and set configuration items in the module’s `build.gradle.kts`:
 
@@ -63,8 +50,8 @@ Apply the plugin and set configuration items in the module’s `build.gradle.kts
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    
-    id("MultilingualPlugin")
+
+    id("io.github.linxu-link.multilingual") version "0.2.0"
 }
 
 multilingual {
