@@ -6,7 +6,7 @@ plugins {
 }
 // 1. 插件元信息（必填）
 group = "io.github.linxu-link" // 命名空间，直接用GitHub用户名
-version = "0.2.0"
+version = "0.3.0"
 val pluginDescription = "A plugin that automatically generates Android multi-language resources based on Excel." // 插件描述
 // 2. 插件核心配置
 gradlePlugin {

@@ -1,16 +1,15 @@
 
 ## MultilingualPlugin
 
-一款适用于车载 Android 应用的 Gradle 插件，可从 Excel 文件自动生成多语言 string.xml，解决全球车型多语言适配中繁琐的人工操作问题。
+一款适用于车载 Android 应用的 Gradle 插件，既可以根据 Excel 文件自动生成多语言 string.xml，也可以将工程内的多语言资源导出到 Excel 文件，解决全球车型多语言适配中繁琐的人工操作问题。
 
 ## 🌟 核心功能
 
 -   **Excel驱动翻译**：通过Excel文件统一管理多语言文本，只需维护一份表格即可生成所有语言的资源文件。
+-   **导出多语言资源**：0.3.0 新增功能，支持将工程内的多语言资源导出到 Excel 文件，方便翻译和管理。
 -   **自动匹配与生成**：插件会自动读取基准语言（如中文）的`strings.xml`，并根据Excel中的翻译内容生成其他语言的`values-xx`目录及对应文件。
 -   **全项目适配**：支持多模块工程（如车载应用常见的主应用+子模块结构），只需在根目录配置一次，即可自动应用到所有`app`和`lib`模块，也支持仅配置单一模块的场景。
 -   **增量更新**：新增或修改翻译时，插件会智能更新已有文件，避免重复生成导致的冲突。
-
-![](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/b4021608c27a4cc6880c8ab31e99b9a7~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5p6X5qCpbGluaw==:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiODcwNDY4OTM5NDM0MDM5In0%3D&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1759599187&x-orig-sign=rwdP1KxTtbHQyj7vAdl6jce5KeQ%3D)
 
 ## 🚀 集成步骤 - Kotlin DSL
 **（1）方案一 - 全局应用**
@@ -23,25 +22,36 @@ alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.android.library) apply false
     
-    id("io.github.linxu-link.multilingual") version "0.2.0"
+    id("io.github.linxu-link.multilingual") version "0.3.0"
 }
 
 multilingual {
-// 启用多语言适配，默认关闭
-    enable.set(true)
-    // 使用project.rootDir获取项目根目录，再拼接相对路径
-    excelFilePath.set(file("${project.rootDir}/language/多语言V1.0.xlsx").absolutePath)
+    /********* 用于生成多语言资源的配置项 ************/
+    // 输入Excel文件路径
+    inputExcelPath.set(file("${project.rootDir}/language/多语言V1.0.xlsx").absolutePath)
     // 基准语言目录，必须与代码中资源文件目录一致
-    baselineDir.set("values")
+    inputBaselineDir.set("values")
     // 基准语言编码，必须与Excel文件中的语言编码一致
-    defaultLanguage.set("zh-rCN")
-} 
+    inputDefaultLanguage.set("zh-rCN")
+    /********* 用于生成多语言资源的配置项 ************/
+
+    /********* 用于导出多语言资源的配置项 ************/
+    // 输出默认语言，用于识别values目录下的默认语言资源
+    outputDefaultLanguage.set("zh-rCN")
+    // 输出Excel文件路径
+    outputExcelPath.set(file("${project.rootDir}/language/多语言V2.0.xlsx").absolutePath)
+    // 由于输出excel会将所有模块的多语言资源一次性导出，所以可以根据需要排除指定的模块，不参与excel导出
+    outputExcludeModules.set(listOf("library"))
+    /********* 用于导出多语言资源的配置项 ************/
+}
+
 ```
 
 **（2）方案二 - 单模块应用**
 
-在模块内`build.gradle.kts`中应用插件并设定配置项：
+在模块内`build.gradle.kts`中应用插件并设定配置项。
 
+注意，0.3.0版本新增的输出excel不支持单模块应用，即使配置成单模块也会将所有模块的多语言资源一次性导出。
 ```
 plugins {
 alias(libs.plugins.android.application)
@@ -51,26 +61,19 @@ alias(libs.plugins.android.application)
 }
 
 multilingual {
-// 启用多语言适配，默认关闭
-    enable.set(true)
-    // 使用project.rootDir获取项目根目录，再拼接相对路径
-    excelFilePath.set(file("${project.rootDir}/language/多语言V1.0.xlsx").absolutePath)
+    /********* 用于生成多语言资源的配置项 ************/
+    // 输入Excel文件路径
+    inputExcelPath.set(file("${project.rootDir}/language/多语言V1.0.xlsx").absolutePath)
     // 基准语言目录，必须与代码中资源文件目录一致
-    baselineDir.set("values")
+    inputBaselineDir.set("values")
     // 基准语言编码，必须与Excel文件中的语言编码一致
-    defaultLanguage.set("zh-rCN")
+    inputDefaultLanguage.set("zh-rCN")
+    /********* 用于生成多语言资源的配置项 ************/
+    
 } 
 ```
 
 全局应用和单模块应用，两种应用方式是互斥的，根据你的需要只在一个build.gradle中配置即可。
-
-**MultilingualPlugin**有四个配置项
-
--   **enable**：是否启用插件，默认为false。在生成多语言字符串资源后，应该将插件关闭，防止拖慢正常的编译流程。
--   **excelFilePath**：Excel翻译文件的路径。
--   **baselineDir**：基准语言的目录，默认为**values**。**MultilingualPlugin**会以基准语言目录下的string.xml为蓝本，获取生成其他语言需要的string name，所以**`baselineDir`**下的**string.xml**必须是完整的。
--   **defaultLanguage**：基准语言在Excel内的编码，默认为**zh-rCN**。
-
 
 
 
@@ -93,18 +96,20 @@ multilingual {
 
 ## 🛠️生成多语言文件
 
-**（1）方案一 - 执行Gradle任务**
+**执行Gradle任务**
 
 ```
 ./gradlew generateTranslations  # 生成所有模块的多语言文件
 ./gradlew :app:generateTranslations  # 生成指定模块的文件
 ```
 
-**（2）方案二 - 执行build Task**
+## 🛠导出多语言资源
 
-![](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/90315de7284642368a50e50312c01fde~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5p6X5qCpbGluaw==:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiODcwNDY4OTM5NDM0MDM5In0%3D&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1759599185&x-orig-sign=dnIg1l5GLoRyNTVhdARwku8EjR8%3D)
+**执行Gradle任务**
 
-插件会自动在`res`目录下生成`values-en`、`values-ja`等目录，并创建对应的`strings.xml`，内容基于Excel翻译生成。
+```
+./gradlew generateExcel  # 导出所有模块的多语言文件
+```
 
 ## 🔙 Switch Language
 - [Back to Root](https://github.com/linxu-link/MultilingualPlugin#%F0%9F%8C%90--language-switch)

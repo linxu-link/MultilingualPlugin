@@ -1,7 +1,17 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+//    id("MultilingualPlugin")
 }
+
+//multilingual {
+//    excelInputPath.set(file("${project.rootDir}/language/多语言V1.0.xlsx").absolutePath)
+//    baselineDir.set("values")
+//    defaultLanguage.set("zh-rCN")
+//
+//    sourceLanguage.set("zh-rCN")
+//    excelOutputPath.set(file("${project.rootDir}/language/多语言V2.0.xlsx").absolutePath)
+//}
 
 android {
     namespace = "com.wj.mylibrary"
@@ -33,7 +43,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

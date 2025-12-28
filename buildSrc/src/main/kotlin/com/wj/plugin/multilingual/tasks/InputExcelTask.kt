@@ -1,4 +1,4 @@
-package com.wj.plugin.multilingual
+package com.wj.plugin.multilingual.tasks
 
 import org.apache.poi.ss.usermodel.WorkbookFactory
 import org.gradle.api.DefaultTask
@@ -20,9 +20,10 @@ import javax.xml.transform.stream.StreamResult
  * 翻译插件的任务类
  * @author wujia
  */
-open class MultilingualTask : DefaultTask() {
+open class InputExcelTask : DefaultTask() {
+
     @get:Input
-    val excelFilePath: Property<String> = project.objects.property(String::class.java)
+    val excelInputPath: Property<String> = project.objects.property(String::class.java)
 
     @get:Input
     val defaultLanguage: Property<String> = project.objects.property(String::class.java)
@@ -32,7 +33,8 @@ open class MultilingualTask : DefaultTask() {
 
     @TaskAction
     fun generateTranslations() {
-        val excelFile = File(excelFilePath.get())
+        logger.lifecycle("==> 开始执行 generateTranslations 任务")
+        val excelFile = File(excelInputPath.get())
         if (!excelFile.exists()) {
             throw GradleException("==> Excel文件不存在: ${excelFile.absolutePath}")
         }

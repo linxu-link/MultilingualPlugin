@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "io.github.wujia"
-version = "0.1.0"
+version = "0.2.0"
 val pluginDescription = "A plugin that automatically generates Android multi-language resources based on Excel."
 
 gradlePlugin {

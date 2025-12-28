@@ -23,4 +23,4 @@ rootProject.name = "MultilingualPlugin"
 include(":app")
 include(":library")
 // 插件项目
-//include(":plugin")
+include(":plugin")
