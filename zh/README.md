@@ -57,7 +57,7 @@ plugins {
 alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     
-    id("io.github.linxu-link.multilingual") version "0.2.0"
+    id("io.github.linxu-link.multilingual") version "0.3.0"
 }
 
 multilingual {
